@@ -24,7 +24,11 @@ INSERT INTO pokemon_plushies VALUES (17, "Bulbasaur", "Grass/Poison", "Large", 3
 
 SELECT * FROM pokemon_plushies ORDER BY price, name;
 
--- Display the minimum and maximum price
+-- Display how many plush toys are being sold per Pokemon type
 
-SELECT MIN(price), MAX(price) FROM pokemon_plushies;
+SELECT type, COUNT(name) FROM pokemon_plushies GROUP BY type;
+
+-- Display the minimum, maximum, and average price
+
+SELECT MIN(price), MAX(price), AVG(price) FROM pokemon_plushies;
 
