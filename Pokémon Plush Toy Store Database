@@ -1,0 +1,30 @@
+-- Create a Pokemon plush toy table
+
+CREATE TABLE pokemon_plushies (id INTEGER PRIMARY KEY, name TEXT, type TEXT, size TEXT, price INTEGER);
+
+INSERT INTO pokemon_plushies VALUES (1, "Pikachu", "Electric", "Small", 10.99);
+INSERT INTO pokemon_plushies VALUES (2, "Pikachu", "Electric", "Medium", 21.99);
+INSERT INTO pokemon_plushies VALUES (3, "Pikachu", "Electric", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (4, "Ditto", "Normal", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (5, "Snorlax", "Normal", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (6, "Charmander", "Fire", "Medium", 21.99);
+INSERT INTO pokemon_plushies VALUES (7, "Squirtle", "Water", "Medium", 21.99);
+INSERT INTO pokemon_plushies VALUES (8, "Bulbasaur", "Grass/Poison", "Medium", 21.99);
+INSERT INTO pokemon_plushies VALUES (9, "Eevee", "Normal", "Small", 10.99);
+INSERT INTO pokemon_plushies VALUES (10, "Eevee", "Normal", "Medium", 21.99);
+INSERT INTO pokemon_plushies VALUES (11, "Eevee", "Normal", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (12, "Charmander", "Fire", "Small", 10.99);
+INSERT INTO pokemon_plushies VALUES (13, "Charmander", "Fire", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (14, "Squirtle", "Water", "Small", 10.99);
+INSERT INTO pokemon_plushies VALUES (15, "Squirtle", "Water", "Large", 32.99);
+INSERT INTO pokemon_plushies VALUES (16, "Bulbasaur", "Grass/Poison", "Small", 10.99);
+INSERT INTO pokemon_plushies VALUES (17, "Bulbasaur", "Grass/Poison", "Large", 32.99);
+
+-- Display the database ordered by price and name
+
+SELECT * FROM pokemon_plushies ORDER BY price, name;
+
+-- Display the minimum and maximum price
+
+SELECT MIN(price), MAX(price) FROM pokemon_plushies;
+
