@@ -1,0 +1,73 @@
+/* Creating a table of K-Pop Group Seventeen Members */
+CREATE TABLE seventeen_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    nationality TEXT
+);
+
+/* Inserting information from all 13 members */
+INSERT INTO seventeen_members (name, nationality) VALUES ("S.Coups", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Jeonghan", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Joshua", "Korean-American");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Jun", "Chinese");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Hoshi", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Wonwoo", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Woozi", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("DK", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Mingyu", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("The8", "Chinese");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Seungkwan", "Korean");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Vernon", "Korean-American");
+INSERT INTO seventeen_members (name, nationality) VALUES ("Dino", "Korean");
+
+SELECT * FROM seventeen_members;
+
+/* Creating a table with Seventeen's sub-units and their members */
+CREATE TABLE subunits (
+    member_id INTEGER,
+    subunit_name TEXT
+);
+
+/* Assigning all 13 members to their respective subunits */
+
+/* Hip-Hop Team Members */
+INSERT INTO subunits VALUES (1, "Hip-Hop Team");
+INSERT INTO subunits VALUES (6, "Hip-Hop Team");
+INSERT INTO subunits VALUES (9, "Hip-Hop Team");
+INSERT INTO subunits VALUES (12, "Hip-Hop Team");
+
+/* Vocal Team Members */
+INSERT INTO subunits VALUES (2, "Vocal Team");
+INSERT INTO subunits VALUES (3, "Vocal Team");
+INSERT INTO subunits VALUES (7, "Vocal Team");
+INSERT INTO subunits VALUES (8, "Vocal Team");
+INSERT INTO subunits VALUES (11, "Vocal Team");
+
+/* Performance Team Members */
+INSERT INTO subunits VALUES (4, "Performance Team");
+INSERT INTO subunits VALUES (5, "Performance Team");
+INSERT INTO subunits VALUES (10, "Performance Team");
+INSERT INTO subunits VALUES (13, "Performance Team");
+
+/* Creating a table pairing Seventeen's "foreign" nationatilies */
+CREATE TABLE foreign_line (
+    foreign_id1 INTEGER,
+    foreign_id2 INTEGER
+);
+
+/* Inserting pairs of members who share "foreign" nationalities */
+INSERT INTO foreign_line VALUES (3, 12);
+INSERT INTO foreign_line VALUES (4, 10);
+
+/* Joining tables to show each member's name and the name of the subunit they belong to */
+SELECT name, subunit_name FROM seventeen_members
+    JOIN subunits
+    ON seventeen_members.id = subunits.member_id
+    ORDER BY seventeen_members.id;
+    
+/* Joining tables to show pairs of member who share same nationality */
+SELECT a.nationality, a.name, b.name FROM foreign_line
+    JOIN seventeen_members a
+    ON foreign_line.foreign_id1 = a.id
+    JOIN seventeen_members b
+    ON foreign_line.foreign_id2 = b.id;
