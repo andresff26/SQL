@@ -1,0 +1,84 @@
+-- For this project, I downloaded Spotify data from Kaggle.
+-- Then I created a table to insert Spotify data into.
+-- Finally, I performed analytics on the data using SQL.
+
+-- Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+-- Then I inserted the Spotify Data .csv into the table.
+
+-- Next, I explored the data using the following SQL:
+
+SELECT * FROM SpotifyData;
+
+-- What is the average danceability by artist?
+SELECT artist_name, AVG(danceability) as avg_danceability
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY avg_danceability DESC;
+
+-- Who are the top 10 artists based on average popularity?
+SELECT artist_name, AVG(popularity) as avg_popularity
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY avg_popularity DESC
+LIMIT 10;
+
+-- Which artist released the longest song in seconds?
+SELECT artist_name, track_name, duration_ms / 1000 as duration_seconds
+FROM SpotifyData
+ORDER BY duration_seconds DESC
+LIMIT 1;
+
+-- How many songs on the Top 50 Spotify List are by the same artist?
+SELECT COUNT(track_name) as track_quantity, artist_name
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY track_quantity DESC;
+
+-- How many songs on the Top 50 Spotify List have a Major/Minor Modality?
+SELECT COUNT(song_mode) as quantity,
+CASE
+    WHEN song_mode = 1 THEN "Major"
+    ELSE "Minor"
+END song_mode
+FROM SpotifyData
+GROUP BY song_mode
+ORDER BY quantity DESC;
+
+-- Which songs on the Top 50 Spotify List have a Major/Minor Modality?
+SELECT id, artist_name, track_name,
+CASE
+    WHEN song_mode = 1 THEN "Major"
+    ELSE "Minor"
+END song_mode
+FROM SpotifyData;
+
+-- What is the minimum, maximum, and average tempo from all the songs on the Top 50 Spotify List?
+SELECT MIN(tempo) as min_tempo, AVG(tempo) as avg_tempo, MAX(tempo) as max_tempo
+FROM SpotifyData;
+
+-- What are the songs with a tempo lower than or equal to 120bpm?
+SELECT artist_name, track_name, tempo
+FROM SpotifyData
+WHERE tempo <= 120
+ORDER BY tempo DESC;
